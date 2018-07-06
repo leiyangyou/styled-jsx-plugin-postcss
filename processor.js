@@ -1,5 +1,6 @@
 const postcss = require('postcss')
 const loader = require('postcss-load-plugins')
+const path = require('path')
 
 let plugins
 let _processor
@@ -9,7 +10,7 @@ function processor(src, options) {
 
   let loaderPromise
   if (!plugins) {
-    loaderPromise = loader(options.env || process.env, null, { argv: false })
+    loaderPromise = loader(options.env || process.env, path.join(__dirname, ".."), { argv: false })
       .then(pluginsInfo => {
         plugins = pluginsInfo.plugins || []
       })
